@@ -1,0 +1,17 @@
+<Project>
+   <Choose>
+    <When Condition="$(MSBuildProjectName)!='docker-compose'">
+      <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6"/>
+        <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="16.4.16"/>
+        <PackageReference Include="StyleCop.Analyzers" Version="1.1.118"/>
+      </ItemGroup>
+
+      <ItemGroup>
+        <AdditionalFiles Include="$(MSBuildThisFileDirectory)StyleCop.json">
+          <Visible>false</Visible>
+        </AdditionalFiles>
+      </ItemGroup>
+    </When>
+  </Choose> 
+</Project>

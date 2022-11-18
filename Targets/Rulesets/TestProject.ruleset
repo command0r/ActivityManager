@@ -1,0 +1,35 @@
+﻿<RuleSet Name="TestPtoject" ToolsVersion="15.0">
+  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+    <!-- CA1040: Avoid empty interfaces. -->
+    <Rule Id="CA1040" Action="None" />
+    <!-- CA2007: Do not directly await a Task without calling ConfigureAwait. -->
+    <Rule Id="CA2007" Action="None" />
+    <!-- CA2225: Operator overloads have named alternates -->
+    <Rule Id="CA2225" Action="None" />
+    <!-- RS0014: Do not use Enumerable methods on indexable collections. Instead use the collection directly -->
+    <Rule Id="RS0014" Action="None" />
+    <!-- CA1707: Identifiers should not contain underscores. -->
+    <Rule Id="CA1707" Action="None" />
+    <!-- CA2007: Do not directly await a Task without calling ConfigureAwait -->
+    <Rule Id="CA2007" Action="None" />
+    <!-- CA2234: Pass System.Uri objects instead of strings -->
+    <Rule Id="CA2234" Action="None" />
+    <!--  CA1305: Specify IFormatProvider -->
+    <Rule Id="CA1305" Action="None" />
+  </Rules>
+
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <!-- SA0001: XML comment analysis is disabled due to project configuration. -->
+    <Rule Id="SA0001" Action="None" />
+    <!-- SA1101: Prefix local calls with this. -->
+    <Rule Id="SA1101" Action="None" />
+    <!-- SA1204: A static element is positioned beneath an instance element of the same type. -->
+    <Rule Id="SA1204" Action="Info" />
+    <!-- SA1309:FieldNamesMustNotBeginWithUnderscore -->
+    <Rule Id="SA1309" Action="None" />
+    <!-- SA1503: The opening and closing braces for a C# statement have been omitted. -->
+    <Rule Id="SA1503" Action="None" />
+    <!-- SA1633: A C# code file is missing a standard file header. -->
+    <Rule Id="SA1633" Action="None" />
+  </Rules>
+</RuleSet>

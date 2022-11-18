@@ -1,0 +1,22 @@
+<Project>
+    <PropertyGroup>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <!-- CS0618: Member is obsolete. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CS0618</WarningsNotAsErrors>
+        <!-- CA1716: Identifiers should not match keywords. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA1716</WarningsNotAsErrors>
+        <!-- VSTHRD200: Use Async suffix for async methods. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);VSTHRD200</WarningsNotAsErrors>
+         <!-- SA1512: A single-line comment within C# code is followed by a blank line. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);SA1512</WarningsNotAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="$(IsTestProject) != true">
+        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)Rulesets/Project.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="$(IsTestProject) == true">
+        <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)Rulesets/TestProject.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+    <Import Project="UnfixedWarnings.props" />
+</Project>

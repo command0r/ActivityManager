@@ -1,0 +1,52 @@
+﻿<RuleSet Name="Project" ToolsVersion="15.0">
+  <Rules AnalyzerId="Microsoft.CodeQuality.Analyzers" RuleNamespace="Microsoft.CodeQuality.Analyzers">
+     <!-- CA1031: Do not catch general exception types. -->
+    <Rule Id="CA1031" Action="None" />
+    <!-- CA1040: Avoid empty interfaces. -->
+    <Rule Id="CA1040" Action="None" />
+     <!-- CA1062: Validate arguments of public methods -->
+    <Rule Id="CA1062" Action="None" />
+    <!-- CA1303: Do not pass literals as localized parameters. -->
+    <Rule Id="CA1303" Action="None" />
+    <!-- CA2007: Do not directly await a Task without calling ConfigureAwait. -->
+    <Rule Id="CA2007" Action="None" />
+    <!-- CA2225: Operator overloads have named alternates -->
+    <Rule Id="CA2225" Action="None" />
+    <!-- RS0014: Do not use Enumerable methods on indexable collections. Instead use the collection directly -->
+    <Rule Id="RS0014" Action="None" />
+  </Rules>
+
+   <Rules AnalyzerId="Microsoft.VisualStudio.Threading.Analyzers" RuleNamespace="Microsoft.VisualStudio.Threading.Analyzers">
+  </Rules>
+
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <!-- SA0001	XML comments	-->
+    <Rule Id="SA0001" Action="None" />
+    <!-- SA1633: A C# code file is missing a standard file header. -->
+    <Rule Id="SA1633" Action="None" />
+    <!-- SA1309:FieldNamesMustNotBeginWithUnderscore -->
+    <Rule Id="SA1309" Action="None" />
+    <!-- SA1101:prefixes wits this -->
+    <Rule Id="SA1101" Action="None" />
+    <!-- SA1516:empty line between properties -->
+    <Rule Id="SA1516" Action="None" />
+    <!-- SA1201	A operator should not follow a method	-->
+    <Rule Id="SA1201" Action="None" />
+
+    <!-- Formatting parameters	-->
+    <Rule Id="SA1117" Action="None" />
+    <Rule Id="SA1118" Action="None" />
+
+    <!-- naimg after implementing collection -->
+    <Rule Id="CA1710" Action="None" />
+
+    <!-- unused method params -->
+    <Rule Id="CA1801" Action="None" />
+
+    <!-- static ctors -->
+    <Rule Id="CA1810" Action="None" />
+
+    <!-- events naming -->
+    <Rule Id="CA1030" Action="None" />
+  </Rules>
+</RuleSet>

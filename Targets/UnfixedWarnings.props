@@ -1,0 +1,36 @@
+<Project>
+  <Choose>
+    <When Condition="$(MSBuildProjectName)=='KickStarter'">
+      <PropertyGroup>
+        <!-- CA1822: Mark members as static -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA1822</WarningsNotAsErrors>
+        <!-- CA1052: Not declared with the static or Shared modifier -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA1052</WarningsNotAsErrors>
+        <!-- CA1032: Implement standard exception constructors. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA1032</WarningsNotAsErrors>
+        <!-- CA2227: Collection properties should be read only. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA2227</WarningsNotAsErrors>
+        <!-- SA1614: Element parameter documentation should have text. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);SA1614</WarningsNotAsErrors>
+         <!-- SA1606: Element documentation should have summary text. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);SA1606</WarningsNotAsErrors>
+        <!-- SA1623: The property's documentation summary text should begin with: 'Gets or sets'. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);SA1623</WarningsNotAsErrors>
+        <!-- SA1616: Element return value documentation should have text. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);SA1616</WarningsNotAsErrors>
+         <!-- SA1622: Generic type parameter documentation should have text. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);SA1622</WarningsNotAsErrors>
+        <!-- CS1591: Missing XML comment for publicly visible type or member. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CS1591</WarningsNotAsErrors>
+        <!-- CA1308: Normalize strings to uppercase. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA1308</WarningsNotAsErrors>
+          <!-- CA2000: Dispose objects before losing scope. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA2000</WarningsNotAsErrors>
+        <!-- CA2227: Change 'Children' to be read-only by removing the property setter. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA2227</WarningsNotAsErrors>
+        <!-- CA1056: URI properties should not be strings. -->
+        <WarningsNotAsErrors>$(WarningsNotAsErrors);CA1056</WarningsNotAsErrors>
+      </PropertyGroup>
+    </When>
+  </Choose>
+</Project>

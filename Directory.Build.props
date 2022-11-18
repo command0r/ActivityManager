@@ -1,0 +1,7 @@
+<Project>
+    <PropertyGroup>
+        <IsTestProject Condition="$(MSBuildProjectName.EndsWith('Tests'))">true</IsTestProject>
+    </PropertyGroup>
+
+    <Import Project="Targets/CodeAnalysis.props" />
+</Project>  
