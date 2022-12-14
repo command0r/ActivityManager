@@ -1,13 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-	<TargetFramework>net6.0</TargetFramework>
+	<TargetFramework>net7.0</TargetFramework>
 	  <ImplicitUsings>enable</ImplicitUsings>
+	  <Nullable>disable</Nullable>
+      <NoWarn>$(NoWarn);CA1014;CA1303;CA1812;CA1822</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup>
-	<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    </ItemGroup>
 
   <ItemGroup>
 	<ProjectReference Include="..\Application\Application.csproj" />
