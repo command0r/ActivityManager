@@ -26,7 +26,7 @@ public class List
 
         public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
         {
-            try
+            /*try
             {
                 for (int i = 0; i < 5; i++)
                 {
@@ -38,7 +38,7 @@ public class List
             catch (System.Exception)
             {
                 _logger.LogInformation("Task was cancelled");
-            }
+            }*/
 
             return await _context.Activities.ToListAsync();
         }

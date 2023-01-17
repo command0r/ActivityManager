@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
-import './App.css';
 import axios from "axios";
 import {Header, List, ListItem} from "semantic-ui-react";
 
@@ -12,7 +10,7 @@ function App() {
   useEffect(() => {
      axios.get('http://localhost:5000/api/Activities')
          .then(response => {
-           console.log(response);
+           // console.log(response);
            setActivities(response.data);
          })
     // Set dependencies so that the call only happens once
