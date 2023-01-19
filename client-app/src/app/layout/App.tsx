@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {Header, List, ListItem} from "semantic-ui-react";
+import {Container, Header, List, ListItem} from "semantic-ui-react";
 import {Activity} from "../models/activity";
+import NavBar from "./NavBar";
+import ActivitiesDashboard from "../../features/activities/dashboard/ActivitiesDashboard";
 
 function App() {
   // Use a 'useState' hook to store activities when the results get back from the API
@@ -19,15 +21,10 @@ function App() {
   
   return (
     <div>
-      <Header as='h2' icon='users' content='Activities' />
-        
-        <List>
-            {activities.map(activity => (
-                <ListItem key={activity.id}>
-                    {activity.title}
-                </ListItem>
-            ))}
-        </List>
+      <NavBar />
+        <Container style={{marginTop: '7em'}}>
+            <ActivitiesDashboard activities={activities} />
+        </Container>
     </div>
   );
 }
