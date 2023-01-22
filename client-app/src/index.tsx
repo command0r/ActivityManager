@@ -4,16 +4,22 @@ import 'semantic-ui-css/semantic.min.css';
 import './app/layout/styles.css'
 import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "./dev";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 root.render(
-  // Beware that 'StrictMode' renders a component twice to detect any issues at runtime
-  // It will cause a duplicate API calls (in the case if the call is made on the page load) 
-  // <React.StrictMode>
-    <App />
-  // </React.StrictMode>
+    // Beware that 'StrictMode' renders a component twice to detect any issues at runtime
+    // It will cause a duplicate API calls (in the case if the call is made on the page load) 
+    // <React.StrictMode>
+    <DevSupport ComponentPreviews={ComponentPreviews}
+                useInitialHook={useInitial}
+    >
+        <App/>
+    </DevSupport>
+    // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
