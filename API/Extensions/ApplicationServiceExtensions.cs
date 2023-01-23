@@ -15,6 +15,9 @@ public static class ApplicationServiceExtensions
         services.AddDbContext<DataContext>(opt =>
         {
             opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+
+            // Solving DateTime conversion issue with kind=UTC
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         });
 
         // Use CORS
