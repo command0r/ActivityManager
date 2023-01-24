@@ -6,8 +6,13 @@ import ActivitiesDashboard from "../../features/activities/dashboard/ActivitiesD
 import {v4 as uuid} from 'uuid';
 import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
+import {useStore} from "../stores/store";
+import { observer } from 'mobx-react-lite';
 
 function App() {
+  // Use store (destructuring object to access ActivityStore)
+  const {activityStore} = useStore();
+    
   // Use a 'useState' hook to store activities when the results get back from the API
   // Give 'useState' an empty array to get around the 'activities' variable render as 'undefined'
   const [activities, setActivities] = useState<Activity[]>([]);
@@ -15,23 +20,12 @@ function App() {
   // The initial state of Activity is 'undefined' (logic for passing mouse click and edit)
   const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
   const [editMode, setEditMode] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   
   useEffect(() => {
-     agent.Activities.list().then(response => {
-           // Update date property before we 'set' activity
-           let activities: Activity[] = [];
-           response.forEach(activity => {
-               activity.date = activity.date.split('T')[0];
-               activities.push(activity);
-           })
-           // console.log(response);
-           setActivities(activities);
-           setLoading(false);
-         })
+    activityStore.loadActivities();
     // Set dependencies so that the call only happens once
-  }, [])
+  }, [activityStore])
     
   // Logic to pass down the button click on a specific activity to a downstream component
   function handleSelectActivity(id: String) {
@@ -82,14 +76,14 @@ function App() {
       })
   }
   
-  if(loading) return <LoadingComponent content='Loading app' />
+  if(activityStore.loadingInitial) return <LoadingComponent content='Loading app' />
       
   return (
     <div>
       <NavBar openForm={handleFormOpen} />
         <Container style={{marginTop: '7em'}}>
             <ActivitiesDashboard 
-                activities={activities}
+                activities={activityStore.activities}
                 selectedActivity={selectedActivity}
                 selectActivity={handleSelectActivity}
                 cancelSelectActivity={handleCancelSelectActivity}
@@ -105,4 +99,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

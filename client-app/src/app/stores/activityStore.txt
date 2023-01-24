@@ -1,0 +1,25 @@
+// DEMO file!
+
+import {action, makeAutoObservable, makeObservable, observable} from "mobx";
+
+export default class ActivityStore {
+    title = 'Hello from MobX!'
+    
+    constructor() {
+        makeAutoObservable(this)
+    }
+
+    // Works differently with autoObservable
+    /*constructor() {
+        makeObservable(this, {
+            title: observable,
+            setTitle: action.bound
+        })
+    }*/
+    
+    // or - setTitle = () => { (this construction automatically binds the function to ActiveStore class)
+    // instead of setTitle: action.bound above
+    setTitle = () => {
+        this.title = this.title + '!';
+    }
+}
