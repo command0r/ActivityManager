@@ -4,21 +4,21 @@ import 'semantic-ui-css/semantic.min.css';
 import './app/layout/styles.css'
 import App from './app/layout/App';
 import reportWebVitals from './reportWebVitals';
-import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "./dev";
+import {store, StoreContext} from "./app/stores/store";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
-    // Beware that 'StrictMode' renders a component twice to detect any issues at runtime
-    // It will cause a duplicate API calls (in the case if the call is made on the page load) 
-    // <React.StrictMode>
-    <DevSupport ComponentPreviews={ComponentPreviews}
-                useInitialHook={useInitial}
-    >
+    // Store context - make it available for the entire app
+    <StoreContext.Provider value={store}>
         <App/>
-    </DevSupport>
+    </StoreContext.Provider>
+
+    // Beware - 'StrictMode' renders a component twice to detect any issues at runtime
+    // It will cause a duplicate API calls (in the case if the call is made on the page load)
+    // <React.StrictMode>
+    // <App />
     // </React.StrictMode>
 );
 
