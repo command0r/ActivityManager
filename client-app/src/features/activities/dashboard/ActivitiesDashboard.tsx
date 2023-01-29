@@ -1,16 +1,25 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Grid} from "semantic-ui-react";
 import ActivityList from "./ActivityList";
 import ActivityDetails from "../details/ActivityDetails";
 import ActivityForm from "../form/ActivityForm";
 import {useStore} from "../../../app/stores/store";
 import {observer} from "mobx-react-lite";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 // Introducing interface in a property to use in a List  
 export default observer(function ActivitiesDashboard() {
-    
+
+    // Use store (destructuring object to access ActivityStore)
     const {activityStore} = useStore();
     const {selectedActivity, editMode} = activityStore;
+
+    useEffect(() => {
+        activityStore.loadActivities();
+        // Set dependencies so that the call only happens once
+    }, [activityStore])
+
+    if(activityStore.loadingInitial) return <LoadingComponent content='Loading app' />
     
     return (
         <Grid>
