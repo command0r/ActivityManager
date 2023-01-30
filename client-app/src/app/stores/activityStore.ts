@@ -5,11 +5,10 @@ import {v4 as uuid} from 'uuid';
 
 export default class ActivityStore {
     activityRegistry = new Map<string, Activity>();
-    
     selectedActivity: Activity | undefined = undefined;
     editMode = false;
     loading = false;
-    loadingInitial = true;
+    loadingInitial = false;
 
     constructor() {
         makeAutoObservable(this)

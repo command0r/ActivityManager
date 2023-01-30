@@ -10,12 +10,12 @@ export default observer(function ActivitiesDashboard() {
 
     // Use store (destructuring object to access ActivityStore)
     const {activityStore} = useStore();
-    const {selectedActivity, editMode} = activityStore;
+    const {loadActivities, activityRegistry} = activityStore;
 
     useEffect(() => {
-        activityStore.loadActivities();
+       if(activityRegistry.size <= 1) loadActivities();
         // Set dependencies so that the call only happens once
-    }, [activityStore])
+    }, [loadActivities])
 
     if(activityStore.loadingInitial) return <LoadingComponent content='Loading app' />
     
