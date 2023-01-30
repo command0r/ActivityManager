@@ -5,11 +5,10 @@ import {v4 as uuid} from 'uuid';
 
 export default class ActivityStore {
     activityRegistry = new Map<string, Activity>();
-    
     selectedActivity: Activity | undefined = undefined;
     editMode = false;
     loading = false;
-    loadingInitial = true;
+    loadingInitial = false;
 
     constructor() {
         makeAutoObservable(this)
@@ -24,13 +23,11 @@ export default class ActivityStore {
     // 'Arrow' func, so that no need to worry about binding to a class
     // All async code is inside the try/catch block
     loadActivities = async () => {
+        this.setLoadingInitial(true);
         try {
             const activities = await agent.Activities.list();
             activities.forEach(activity => {
-                // Update date property before we 'set' activity
-                activity.date = activity.date.split('T')[0];
-                // Mutate the state in MobX (populate an array with received activities)
-                this.activityRegistry.set(activity.id, activity);
+                this.setActivity(activity);
             })
             this.setLoadingInitial(false);
         } catch (error) {
@@ -38,28 +35,42 @@ export default class ActivityStore {
             this.setLoadingInitial(false);
         }
     }
+    
+    // Load a single activity
+    loadActivity = async (id: string) => {
+        let activity = this.getActivity(id);
+        if(activity) {
+            this.selectedActivity = activity;
+            return activity;
+        }
+        else {
+            this.setLoadingInitial(true);
+            try {
+                activity = await agent.Activities.details(id);
+                this.setActivity(activity);
+                runInAction(() => this.selectedActivity = activity);
+                this.setLoadingInitial(false);
+                return activity;
+            } catch (error) {
+                console.log(error);
+                this.setLoadingInitial(false);
+            }
+        }
+    }
+    
+    private setActivity = (activity: Activity) => {
+        // Update date property before we 'set' activity
+        activity.date = activity.date.split('T')[0];
+        // Mutate the state in MobX (populate an array with received activities)
+        this.activityRegistry.set(activity.id, activity);
+    }
+    
+    private getActivity = (id: string) => {
+        return this.activityRegistry.get(id);
+    }
 
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state;
-    }
-
-    // Logic to pass down the button click on a specific activity to a downstream component
-    selectActivity = (id: string) => {
-        this.selectedActivity = this.activityRegistry.get(id);
-    }
-
-    cancelSelectedActivity = () => {
-        this.selectedActivity = undefined;
-    }
-
-    // Edit logic
-    openForm = (id?: string) => {
-        id ? this.selectActivity(id) : this.cancelSelectedActivity();
-        this.editMode = true;
-    }
-
-    closeForm = () => {
-        this.editMode = false;
     }
 
     // Create Activity method
@@ -111,8 +122,6 @@ export default class ActivityStore {
             await agent.Activities.delete(id);
             runInAction(() => {
                 this.activityRegistry.delete(id);
-                
-                if (this.selectedActivity?.id === id) this.cancelSelectedActivity();
                 this.loading = false;
             })
         } catch (error) {
