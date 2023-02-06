@@ -1,5 +1,7 @@
 using Application.Activities;
 using Application.Core;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -34,6 +36,10 @@ public static class ApplicationServiceExtensions
 
         // Adding Automapper
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+        // Adding automatic validation
+        services.AddFluentValidationAutoValidation();
+        services.AddValidatorsFromAssemblyContaining<Create>();
 
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();

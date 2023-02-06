@@ -18,9 +18,9 @@ public class ActivitiesController : BaseApiController
 
     // api/activities/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<Activity>> GetActivityAsync(Guid id)
+    public async Task<IActionResult> GetActivityAsync(Guid id)
     {
-        return await Mediator.Send(new Details.Query { Id = id });
+        return HandleResult(await Mediator.Send(new Details.Query { Id = id }));
     }
 
     // Create endpoint

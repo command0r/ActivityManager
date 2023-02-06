@@ -1,3 +1,4 @@
+using Application.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,4 +12,20 @@ public class BaseApiController : ControllerBase
 
     // Populating _mediator variable with Mediator service
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+
+    // Handling API return logic
+    protected ActionResult HandleResult<T>(Result<T> result)
+    {
+        if (result.IsSuccess && result.Value != null)
+        {
+            return Ok(result.Value);
+        }
+
+        if (result.IsSuccess && result.Value == null)
+        {
+            return NotFound();
+        }
+
+        return BadRequest(result.Error);
+    }
 }
