@@ -1,3 +1,4 @@
+using Application.Core;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -7,8 +8,8 @@ namespace Application.Activities;
 
 public class Create
 {
-    // Command (as per CQRS) does not return a result
-    public class Command : IRequest
+    // Command (as per CQRS) does not return a result (Unit comes from MediatR)
+    public class Command : IRequest<Result<Unit>>
     {
         // Passing Activity object as a parameter here (for 'create' operation)
         public Activity Activity { get; set; }
@@ -23,7 +24,7 @@ public class Create
         }
     }
 
-    public class Handler : IRequestHandler<Command>
+    public class Handler : IRequestHandler<Command, Result<Unit>>
     {
         private readonly DataContext _context;
 
@@ -33,13 +34,18 @@ public class Create
             _context = context;
         }
 
-        public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
             // It does not interact with the DB here, so, no need to use Async version of method
             _context.Activities.Add(request.Activity);
 
-            await _context.SaveChangesAsync();
-            return Unit.Value;
+            var result = await _context.SaveChangesAsync() > 0;
+            if (!result)
+            {
+                return Result<Unit>.Failure("Failed to create activity");
+            }
+
+            return Result<Unit>.Success(Unit.Value);
         }
     }
 }

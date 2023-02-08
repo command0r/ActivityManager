@@ -16,6 +16,11 @@ public class BaseApiController : ControllerBase
     // Handling API return logic
     protected ActionResult HandleResult<T>(Result<T> result)
     {
+        if (result == null)
+        {
+            return NotFound();
+        }
+
         if (result.IsSuccess && result.Value != null)
         {
             return Ok(result.Value);
